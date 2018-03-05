@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Customers</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"
+          href="../../css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../../static/css/bootstrap.min.css">
+</head>
+<body>
+<section class="container">
+
+    <table class="table text-center table-hover">
+        <caption>Customers</caption>
+        <thead>
+        <tr>
+            <td>Name</td>
+            <td>Birthdate</td>
+            <td>Young-Driver</td>
+        </tr>
+        </thead>
+        <th:block th:each="customer,row : ${customers}">
+            <tr th:class="${row.even} ? 'table-success' : 'table-info'">
+                <td th:text="${customer.getName()}"></td>
+                <td th:text="${#dates.format(customer.getBirthDate(), 'dd-MM-yyyy')}">>
+                    <!--<time datetime="YYYY-MM-DD" th:text="${customer.getBirthDate()}"></time>-->
+                </td>
+                <td th:text="${customer.isYoungDriver()}? 'yes' : 'no'"></td>
+
+            </tr>
+        </th:block>
+    </table>
+</section>
+</body>
+</html>
