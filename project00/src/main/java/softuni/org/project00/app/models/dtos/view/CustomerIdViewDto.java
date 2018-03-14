@@ -1,30 +1,25 @@
-package softuni.org.project00.app.models.entities;
+package softuni.org.project00.app.models.dtos.view;
 
-import javax.persistence.*;
+import org.springframework.stereotype.Component;
+
 import java.util.Date;
-import java.util.Set;
 
 /**
- * Created by Todor Popov using Lenovo on 5.3.2018 г. at 15:45.
+ * Created by Todor Popov using Lenovo on 8.3.2018 г. at 23:18.
  */
 
-@Entity
-@Table(name = "customers")
-public class Customer {
-
+@Component
+public class CustomerIdViewDto {
     private Long id;
     private String name;
     private Date birthDate;
     private Boolean YoungDriver;
-    private Set<Sale> sales;
 
-    public Customer() {
+    public CustomerIdViewDto() {
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long getId() {
-        return this.id;
+        return id;
     }
 
     public void setId(Long id) {
@@ -39,8 +34,6 @@ public class Customer {
         this.name = name;
     }
 
-    @Column(name = "birth_date", columnDefinition="DATETIME")
-    @Temporal(TemporalType.TIMESTAMP)
     public Date getBirthDate() {
         return this.birthDate;
     }
@@ -49,21 +42,11 @@ public class Customer {
         this.birthDate = birthDate;
     }
 
-    @Column(name = "is_young_driver")
     public Boolean isYoungDriver() {
         return this.YoungDriver;
     }
 
     public void setYoungDriver(Boolean youngDriver) {
         this.YoungDriver = youngDriver;
-    }
-
-    @OneToMany(mappedBy = "customer")
-    public Set<Sale> getSales() {
-        return this.sales;
-    }
-
-    public void setSales(Set<Sale> sales) {
-        this.sales = sales;
     }
 }

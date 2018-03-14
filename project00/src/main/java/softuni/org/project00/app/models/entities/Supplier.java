@@ -55,4 +55,9 @@ public class Supplier {
     public void setParts(Set<Part> parts) {
         this.parts = parts;
     }
+
+    @Transient
+    public Integer getPartsSize() {
+        return this.parts.size();
+    }
 }

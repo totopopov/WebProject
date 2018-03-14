@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Supliers</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" href="../../static/css/bootstrap.min.css">
+</head>
+<body>
+<section class="container">
+
+    <table class="table text-center table-hover">
+        <caption class="text-center">Suppliers</caption>
+        <thead>
+        <tr>
+            <td>Id</td>
+            <td>Name</td>
+            <td>Pars number</td>
+        </tr>
+        </thead>
+        <th:block th:each="supplier,row : ${supliers}">
+            <tr th:class="${row.even} ? 'table-success' : 'table-info'">
+                <td th:text="${supplier.getId()}"></td>
+                <td th:text="${supplier.getName()}"></td>
+                <td th:text="${supplier.getPartsSize()}"></td>
+            </tr>
+        </th:block>
+    </table>
+</section>
+
+</body>
+</html>

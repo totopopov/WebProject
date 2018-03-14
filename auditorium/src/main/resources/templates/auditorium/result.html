@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Search Result</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" href="../../static/css/bootstrap.min.css">
+</head>
+<body>
+
+<section class="container">
+
+    <table class="table text-center table-hover">
+        <caption class="text-center">Available Auditoriums</caption>
+        <thead>
+        <tr>
+            <td>Name</td>
+            <td>Capacity</td>
+            <td>Price</td>
+            <td>LiveStream</td>
+            <td>Chair Type</td>
+            <td>Table Type</td>
+        </tr>
+        </thead>
+        <th:block th:each="room,row : ${page.content}">
+            <tr th:class="${row.even} ? 'table-success' : 'table-info'">
+                <td th:text="${room.getName()}"></td>
+                <td th:text="${room.getMaxCapacity()}"></td>
+                <td th:text="${room.getPrice()}"></td>
+                <td th:text="${room.getLiveStream()}?'yes':'no'"></td>
+                <td th:text="${room.getTableType().getSimpleValue(room.getTableType())}"></td>
+                <td th:text="${room.getChairType().getSimpleValue(room.getChairType())}"></td>
+            </tr>
+        </th:block>
+    </table>
+    <div class="row">
+        <div class="col-sm-7">
+            <!-- Pagination Bar -->
+            <div th:fragment='paginationbar'>
+                <div class="text-center">
+                    <ul class="pagination">
+                        <li th:class="${page.firstPage}?'disabled' : ''">
+                            <span th:if="${page.firstPage}">← First</span>
+                            <a th:if="${not page.firstPage}" th:href="@{${page.url}(page=1,size=${page.size})}">←
+                                First</a>
+                        </li>
+                        <li th:class="${page.hasPreviousPage}? '' : 'disabled'">
+                            <span th:if="${not page.hasPreviousPage}">«</span>
+                            <a th:if="${page.hasPreviousPage}"
+                               th:href="@{${page.url}(page=${page.getNumber()-1},size=${page.size})}"
+                               title="Go to previous page">«</a>
+
+                        </li>
+                        <li th:each="item : ${page.items}" th:class="${item.current}? 'active' : ''">
+
+                            <span th:if="${item.current}" th:text="${item.number}">1</span>
+
+                            <a th:if="${not item.current}"
+                               th:href="@{${page.url}(page=${item.getNumber()},size=${page.size})}"><span
+                                    th:text="${item.number}">1</span></a>
+
+                        </li>
+                        <li th:class="${page.hasNextPage}? '' : 'disabled'">
+
+                            <span th:if="${not page.hasNextPage}">»</span>
+
+                            <a th:if="${page.hasNextPage}"
+                               th:href="@{${page.url}(page=${page.getNumber()+1},size=${page.size})}"
+                               title="Go to next page">»</a>
+
+                        </li>
+                        <li th:class="${page.lastPage}? 'disabled' : ''">
+                            <span th:if="${page.lastPage}">Last →</span>
+                            <a th:if="${not page.lastPage}"
+                               th:href="@{${page.url}(page=${page.getTotalPages()},size=${page.size})}">Last →</a>
+                        </li>
+                    </ul>
+
+
+                    <!--<ul class="pagination pagination-centered">-->
+                        <!--<li th:class="${page.firstPage}?'disabled':''">-->
+                            <!--<span th:if="${page.firstPage}">← First</span>-->
+                            <!--<a th:if="${not page.firstPage}" th:href="@{${page.url}(page=0,size=${page.size})}">←-->
+                                <!--First</a>-->
+                        <!--</li>-->
+                        <!--<li th:class="${page.hasPreviousPage}? '' : 'disabled'">-->
+                            <!--<span th:if="${not page.hasPreviousPage}">«</span>-->
+                            <!--<a th:if="${page.hasPreviousPage}"-->
+                               <!--th:href="@{${page.url}(page=${page.getNumber()-2},size=${page.size})}"-->
+                               <!--title="Go to previous page">«</a>-->
+                        <!--</li>-->
+                        <!--<li th:each="item : ${page.items}" th:class="${item.current}? 'active' : ''">-->
+                            <!--<span th:if="${item.current}" th:text="${item.number}">1</span>-->
+                            <!--<a th:if="${not item.current}"-->
+                               <!--th:href="@{${page.url}(page=${item.number -1},size=${page.size})}"><span-->
+                                    <!--th:text="${item.getNumber()}">1</span></a>-->
+                        <!--</li>-->
+                        <!--<li th:class="${page.hasNextPage}? '' : 'disabled'">-->
+                            <!--<span th:if="${not page.hasNextPage}">»</span>-->
+                            <!--<a th:if="${page.hasNextPage}"-->
+                               <!--th:href="@{${page.url}(page=${page.number},size=${page.size})}"-->
+                               <!--title="Go to next page">»</a>-->
+                        <!--</li>-->
+                        <!--<li th:class="${page.lastPage}? 'disabled' : ''">-->
+                            <!--<span th:if="${page.lastPage}">Last →</span>-->
+                            <!--<a th:if="${not page.lastPage}"-->
+                               <!--th:href="@{${page.url}(page=${page.totalPages - 1},size=${page.size})}">Last →</a>-->
+                        <!--</li>-->
+                    <!--</ul>-->
+                </div>
+            </div>
+        </div>
+
+
+        <!--<div class="justify-content-center">-->
+
+        <!--</div>-->
+</section>
+</body>
+</html>

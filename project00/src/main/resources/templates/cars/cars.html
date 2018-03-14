@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Cars</title>
+    <link rel="stylesheet" href="../../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
+</head>
+<body>
+<section class="container">
+
+    <table class="table text-center table-hover">
+        <caption class="text-center">Cars</caption>
+        <thead>
+        <tr>
+            <td>Make</td>
+            <td>Model</td>
+            <td>Travel-Distance</td>
+        </tr>
+        </thead>
+        <th:block th:each="car,row : ${cars}">
+            <tr th:class="${row.even} ? 'table-success clickable-row' : 'table-info clickable-row'"
+                th:onclick="'javascript:rowClicked(\'' + ${car.getId()} + '\');'">
+                <td th:text="${car.getMake()}"></td>
+                <td th:text="${car.getModel()}"></td>
+                <td th:text="${car.getTravelledDistance()}"></td>
+            </tr>
+        </th:block>
+    </table>
+</section>
+</body>
+<script>
+    function rowClicked(value) {
+        location.href = "/cars/" + value + "/parts";
+    }
+</script>
+</html>

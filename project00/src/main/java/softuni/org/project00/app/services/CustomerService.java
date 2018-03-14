@@ -1,12 +1,16 @@
 package softuni.org.project00.app.services;
 
-import org.springframework.stereotype.Service;
-import softuni.org.project00.app.models.entities.Customer;
+import softuni.org.project00.app.models.dtos.view.CustomerIdViewDto;
+import softuni.org.project00.app.models.dtos.view.CustomerSale;
+
+import java.util.List;
 
 /**
  * Created by Todor Popov using Lenovo on 5.3.2018 г. at 20:36.
  */
 
 public interface CustomerService {
-    Customer[] getCustomers(String type);
+    List<CustomerIdViewDto> getCustomers(String type);
+
+    CustomerSale getCustomer(Long id);
 }
