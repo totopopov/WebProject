@@ -80,7 +80,7 @@ public class AccountController {
     @GetMapping(value = "/admin/demote/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity demote(@PathVariable String name) {
 
-        EditUserBindingModel user = this.userService.promote(name);
+        EditUserBindingModel user = this.userService.demote(name);
 
         return ResponseEntity.ok(gson.toJson(user));
     }

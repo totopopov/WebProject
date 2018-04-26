@@ -150,13 +150,14 @@ function renderRowForAdminUserTable(entry) {
 
     let row = $('#' + username);
     row = (row.length === 0 ? $('<tr id="' + username + '"></tr>') : row);
+    row.empty();
     let rowName = $('<td>' + username + '</td>');
     let rowRole = $('<td>' + (role ? 'admin' : 'user') + '</td>');
     let rowEnabled = $('<td>' + (userEnabled ? 'active' : 'deleted') + '</td>');
 
     let buttonPromote = $('<a href="#/admin/' +
         (role ? 'demote' : 'promote')
-        + '?id=' + username + '" class="btn btn-'+(role ? 'warning' : 'danger')+' btn-sm" role="button">' +
+        + '?id=' + username + '" class="btn btn-' + (role ? 'warning' : 'danger') + ' btn-sm" role="button">' +
         (role ? 'Demote Admin' : 'Promote to Admin')
         + '</a>');
 
@@ -251,7 +252,27 @@ app.router.on("#/admin/promote", ['id'], function (id) {
 
         let row = renderRowForAdminUserTable(data);
 
-        tableBody.append(row);
+    }, function (xhr, status, error) {
+
+        showEror(xhr);
+
+    });
+
+});
+
+
+app.router.on("#/admin/demote", ['id'], function (id) {
+
+    if (!app.authorizationService.isAdmin()) {
+        app.router.redirect('#/');
+        return;
+    }
+
+
+    app.callServize.sendGET('/admin/demote/' + id, function (data) {
+
+        let tableBody = $('#table-users-admin');
+        let row = renderRowForAdminUserTable(data);
 
     }, function (xhr, status, error) {
 
@@ -259,8 +280,9 @@ app.router.on("#/admin/promote", ['id'], function (id) {
 
     });
 
-
 });
+
+
 
 app.router.on("#/login", null, function () {
 
@@ -426,8 +448,6 @@ app.router.on("#/register", null, function () {
         });
     });
 });
-
-
 
 
 window.location.href = '#/';

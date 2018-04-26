@@ -13,7 +13,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -70,7 +72,9 @@ public class UserServiceImpl implements UserService {
         List<EditUserBindingModel> usersDto = this.modelParser.
                 map(users,
                         EditUserBindingModel.class);
-        return usersDto;
+        usersDto = usersDto.stream().sorted((x1, x2) -> x1.getUsername().compareToIgnoreCase(x2.getUsername())).collect(Collectors.toList());
+
+        return Collections.unmodifiableList(usersDto);
 
     }
 
