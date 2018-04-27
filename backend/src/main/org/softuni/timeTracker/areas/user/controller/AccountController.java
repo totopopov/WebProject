@@ -1,8 +1,9 @@
 package org.softuni.timeTracker.areas.user.controller;
 
 import com.google.gson.Gson;
-import org.softuni.timeTracker.areas.user.model.RegisterUserBindingModel;
+import org.softuni.timeTracker.areas.user.models.RegisterUserBindingModel;
 import org.softuni.timeTracker.areas.user.service.UserService;
+import org.softuni.timeTracker.constants.Const;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -21,7 +22,7 @@ public class AccountController {
 
 
     private static final String SUCCESSFULLY_REGISTERED_USER = "Successfully registered user.";
-    private static final String SERVER_ERROR_TRY_AGAIN = "Server error ! Try again.";
+
     private final UserService userService;
     private final Gson gson;
 
@@ -44,7 +45,7 @@ public class AccountController {
         }
 
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body(gson.toJson(SERVER_ERROR_TRY_AGAIN));
+                .body(gson.toJson(Const.SERVER_ERROR_TRY_AGAIN));
     }
 
     @GetMapping(value = "/api/get-role", produces = MediaType.APPLICATION_JSON_VALUE)

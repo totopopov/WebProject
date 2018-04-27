@@ -7,9 +7,7 @@
             <th>Description</th>
             <th class="text-center">Actions</th>
         </tr>
-        </thead>
-        <tbody id="table-activities-admin">
-        <tr>
+        <tr id="activity-form">
             <td>
                 <input id="activity-name" type="text" name="activity" class="form-control">
             </td>
@@ -19,10 +17,11 @@
             <td>
                 <input id="activity-description" type="text" name="activity-description" class="form-control">
             </td>
-            <td><a href="#/" class="btn-success" role="button">Create activity</a></td>
+            <td><a id="activity-button" href="#/admin/activities/create" class="btn btn-success"
+                   role="button">Create</a></td>
         </tr>
-
-
+        </thead>
+        <tbody id="table-activities-admin">
         </tbody>
     </table>
 </div>

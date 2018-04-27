@@ -1,7 +1,7 @@
 package org.softuni.timeTracker.areas.user.controller;
 
 import com.google.gson.Gson;
-import org.softuni.timeTracker.areas.user.model.EditUserBindingModel;
+import org.softuni.timeTracker.areas.user.models.EditUserBindingModel;
 import org.softuni.timeTracker.areas.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -19,13 +19,13 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/admin")
-public class AdminController {
+public class AdminAccountController {
 
     private final UserService userService;
     private final Gson gson;
 
     @Autowired
-    public AdminController(UserService userService, Gson gson) {
+    public AdminAccountController(UserService userService, Gson gson) {
         this.userService = userService;
         this.gson = gson;
     }
@@ -54,11 +54,11 @@ public class AdminController {
     @GetMapping(value = "/deactivate/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity deactivate(@PathVariable String name) {
 
-        return ResponseEntity.ok(gson.toJson(this.userService.deactivate(name)));
+        return ResponseEntity.ok(gson.toJson(this.userService.enable(name, Boolean.FALSE)));
     }
 
     @GetMapping(value = "/activate/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity activate(@PathVariable String name) {
-        return ResponseEntity.ok(gson.toJson(this.userService.activate(name)));
+        return ResponseEntity.ok(gson.toJson(this.userService.enable(name, Boolean.TRUE)));
     }
 }

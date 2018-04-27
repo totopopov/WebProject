@@ -155,13 +155,13 @@ function renderRowForAdminUserTable(entry) {
     let rowRole = $('<td>' + (role ? 'admin' : 'user') + '</td>');
     let rowEnabled = $('<td>' + (userEnabled ? 'active' : 'deleted') + '</td>');
 
-    let buttonPromote = $('<a href="#/admin/?action=' +
+    let buttonPromote = $('<a href="#/admin/user?action=' +
         (role ? 'demote' : 'promote')
         + '&id=' + username + '" class="btn btn-' + (role ? 'warning' : 'danger') + ' btn-sm" role="button">' +
         (role ? 'Demote Admin' : 'Promote to Admin')
         + '</a>');
 
-    let buttonActivate = $('<a href="#/admin/?action=' +
+    let buttonActivate = $('<a href="#/admin/user?action=' +
         (userEnabled ? 'deactivate' : 'activate')
         + '&id=' + username + '" class="btn btn-' + (userEnabled ? 'danger' : 'warning') + ' btn-sm" role="button">' +
         (userEnabled ? 'Deactivate' : 'Activate')
@@ -173,6 +173,38 @@ function renderRowForAdminUserTable(entry) {
     row.append(rowName);
     row.append(rowRole);
     row.append(rowEnabled);
+    row.append(rowActions);
+    return row;
+}
+
+
+function renderRowForAdminActivityTable(entry) {
+    let activity = entry['activity'];
+    let activityKPI = entry['activityKPI'];
+    let description = entry['description'];
+    let enabled = entry['enabled'];
+    let id = entry['id'];
+
+
+    let row = $('#' + id);
+    row = (row.length === 0 ? $('<tr id="' + id + '"></tr>') : row);
+    row.empty();
+    let rowActivity = $('<td>' + activity + '</td>');
+    let rowActivityKPI = $('<td>' + activityKPI + '</td>');
+    let rowDescription = $('<td>' + description + '</td>');
+
+    let button = $('<a href="#/admin/activity?action=' +
+        (enabled ? 'deactivate' : 'activate')
+        + '&id=' + id + '" class="btn btn-' + (enabled ? 'danger' : 'warning') + ' " role="button">' +
+        (enabled ? 'Deactivate' : 'Activate')
+        + '</a>');
+
+
+    let rowActions = $('<td></td>');
+    rowActions.append(button);
+    row.append(rowActivity);
+    row.append(rowActivityKPI);
+    row.append(rowDescription);
     row.append(rowActions);
     return row;
 }
@@ -252,15 +284,16 @@ app.router.on("#/admin/activities", null, function () {
 
             app.callServize.sendGET('/admin/activities', function (data) {
 
+                console.log('Incoming from on activities');
                 console.log(data);
 
-                // let tableBody = $('#table-users-admin');
-                //
-                // for (let entry of data) {
-                //
-                //     let row = renderRowForAdminUserTable(entry);
-                //     tableBody.append(row);
-                // }
+                let tableBody = $('#table-activities-admin');
+
+                for (let entry of data) {
+
+                    let row = renderRowForAdminActivityTable(entry);
+                    tableBody.append(row);
+                }
 
             }, function (xhr, status, error) {
 
@@ -273,31 +306,89 @@ app.router.on("#/admin/activities", null, function () {
 });
 
 
+app.router.on("#/admin/activities/create", null, function () {
 
-function adminAction(action, id) {
-    app.callServize.sendGET('/admin/' + action + '/' + id, function (data) {
+    if (!app.authorizationService.isAdmin()) {
+        app.router.redirect('#/');
+        return;
+
+    }
 
 
-        let tableBody = $('#table-users-admin');
+    window.location.href = '#/admin/activities/created';
 
-        let row = renderRowForAdminUserTable(data);
+    let activityName = $('#activity-name');
+    let activityKPI = $('#activity-KPI');
+    let activityDescription = $('#activity-description');
 
-    }, function (xhr, status, error) {
+    let sendData = JSON.stringify({
+        "activity": activityName.val(),
+        "activityKPI": activityKPI.val(),
+        "description": activityDescription.val()
+    });
+
+
+    app.callServize.sendPOST('/admin/activities/create', sendData, (data) => {
+
+        console.log('Incoming from server');
+        console.log(data);
+
+        let tableBody = $('#table-activities-admin');
+        let row = renderRowForAdminActivityTable(data);
+        tableBody.prepend(row);
+
+        activityName.val('');
+        activityKPI.val('');
+        activityDescription.val('');
+
+    }, (xhr, status, error) => {
 
         showEror(xhr);
 
     });
+
+
+});
+
+app.router.on("#/admin/activity", ['id', 'action'], function (id, action) {
+
+    if (!app.authorizationService.isAdmin()) {
+        app.router.redirect('#/');
+        return;
+
+    }
+
+
+    app.callServize.sendGET('/admin/activities/' + action + '/' + id, (data) => {
+
+        renderRowForAdminActivityTable(data);
+
+    }, (xhr, status, error) => {
+
+        showEror(xhr);
+
+    });
+
+
+});
+
+function adminUserAction(action, id) {
+    app.callServize.sendGET('/admin/' + action + '/' + id, function (data) {
+        renderRowForAdminUserTable(data);
+    }, function (xhr, status, error) {
+        showEror(xhr);
+    });
 }
 
 
-app.router.on("#/admin/", ['action', 'id'], function (action, id) {
+app.router.on("#/admin/user", ['action', 'id'], function (action, id) {
 
     if (!app.authorizationService.isAdmin()) {
         app.router.redirect('#/');
         return;
     }
 
-    adminAction(action, id);
+    adminUserAction(action, id);
 
 });
 
@@ -354,8 +445,7 @@ app.router.on("#/login", null, function () {
                 app.authorizationService.setAuth(auth);
 
             }).fail(function (data) {
-                console.log('fail');
-                console.log(data);
+                console.log(data['status']);
                 new Noty({
                     text: 'ERROR: There was an error with your login.',
                     layout: 'topCenter',

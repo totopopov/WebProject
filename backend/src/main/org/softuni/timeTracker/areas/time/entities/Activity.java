@@ -1,4 +1,4 @@
-package org.softuni.timeTracker.areas.time;
+package org.softuni.timeTracker.areas.time.entities;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -23,7 +23,13 @@ public class Activity {
 
     private String description;
 
+    private Boolean enabled;
+
     public Activity() {
+    }
+
+    public String getId() {
+        return id;
     }
 
     public String getActivity() {
@@ -40,5 +46,21 @@ public class Activity {
 
     public void setActivityKPI(String activityKPI) {
         this.activityKPI = activityKPI;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
     }
 }

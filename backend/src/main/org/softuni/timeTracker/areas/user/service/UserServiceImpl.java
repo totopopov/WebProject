@@ -3,8 +3,8 @@ package org.softuni.timeTracker.areas.user.service;
 import org.softuni.timeTracker.areas.user.entities.Role;
 import org.softuni.timeTracker.areas.user.entities.User;
 import org.softuni.timeTracker.areas.user.enumerations.RoleEnum;
-import org.softuni.timeTracker.areas.user.model.EditUserBindingModel;
-import org.softuni.timeTracker.areas.user.model.RegisterUserBindingModel;
+import org.softuni.timeTracker.areas.user.models.EditUserBindingModel;
+import org.softuni.timeTracker.areas.user.models.RegisterUserBindingModel;
 import org.softuni.timeTracker.areas.user.repository.UserRepository;
 import org.softuni.timeTracker.utils.ModelParser;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -73,7 +73,7 @@ public class UserServiceImpl implements UserService {
     public List<EditUserBindingModel> getAllUsers() {
         List<User> users = this.userRepository.
                 findAllByUsernameIsNotAndUsernameIsNot(SecurityContextHolder.getContext().getAuthentication().
-                getPrincipal().toString(), ADMIN);
+                        getPrincipal().toString(), ADMIN);
         List<EditUserBindingModel> usersDto = this.modelParser.
                 map(users,
                         EditUserBindingModel.class);
@@ -101,16 +101,9 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public EditUserBindingModel deactivate(String username) {
+    public EditUserBindingModel enable(String username, Boolean enable) {
         User user = this.userRepository.findByUsername(username);
-        user.setEnabled(Boolean.FALSE);
-        return this.modelParser.map(this.userRepository.save(user), EditUserBindingModel.class);
-    }
-
-    @Override
-    public EditUserBindingModel activate(String username) {
-        User user = this.userRepository.findByUsername(username);
-        user.setEnabled(Boolean.TRUE);
+        user.setEnabled(enable);
         return this.modelParser.map(this.userRepository.save(user), EditUserBindingModel.class);
     }
 

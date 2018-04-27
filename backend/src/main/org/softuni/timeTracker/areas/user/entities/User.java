@@ -1,7 +1,7 @@
 package org.softuni.timeTracker.areas.user.entities;
 
 import org.hibernate.annotations.GenericGenerator;
-import org.softuni.timeTracker.areas.time.TimeUnit;
+import org.softuni.timeTracker.areas.time.entities.TimeUnit;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 

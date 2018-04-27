@@ -1,7 +1,7 @@
 package org.softuni.timeTracker.areas.user.service;
 
-import org.softuni.timeTracker.areas.user.model.EditUserBindingModel;
-import org.softuni.timeTracker.areas.user.model.RegisterUserBindingModel;
+import org.softuni.timeTracker.areas.user.models.EditUserBindingModel;
+import org.softuni.timeTracker.areas.user.models.RegisterUserBindingModel;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.List;
@@ -17,7 +17,6 @@ public interface UserService extends UserDetailsService {
 
     EditUserBindingModel demote(String username);
 
-    EditUserBindingModel deactivate(String username);
+    EditUserBindingModel enable(String username, Boolean enable);
 
-    EditUserBindingModel activate(String username);
 }

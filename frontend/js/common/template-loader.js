@@ -13,8 +13,6 @@ function loadNavbar() {
             });
         }
 
-        console.log(app.authorizationService.isAdmin());
-
         $('#logout-button').click(function (e) {
             e.preventDefault();
 

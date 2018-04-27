@@ -25,4 +25,5 @@ public class ConfirmUserNameValidator implements ConstraintValidator<ConfirmUser
     public boolean isValid(String username, ConstraintValidatorContext context) {
         return !userService.userExists(username);
     }
+
 }

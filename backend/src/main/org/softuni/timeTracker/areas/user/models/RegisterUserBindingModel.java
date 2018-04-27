@@ -1,4 +1,4 @@
-package org.softuni.timeTracker.areas.user.model;
+package org.softuni.timeTracker.areas.user.models;
 
 
 import org.softuni.timeTracker.areas.user.entities.customValidator.ConfirmPassword;

@@ -1,4 +1,4 @@
-package org.softuni.timeTracker.areas.time.customValidator;
+package org.softuni.timeTracker.areas.time.entities.customValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;

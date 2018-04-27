@@ -1,4 +1,4 @@
-package org.softuni.timeTracker.areas.time;
+package org.softuni.timeTracker.areas.time.entities;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.softuni.timeTracker.areas.user.entities.User;

@@ -1,7 +1,7 @@
 package org.softuni.timeTracker.areas.user.entities.customValidator;
 
 
-import org.softuni.timeTracker.areas.user.model.RegisterUserBindingModel;
+import org.softuni.timeTracker.areas.user.models.RegisterUserBindingModel;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;

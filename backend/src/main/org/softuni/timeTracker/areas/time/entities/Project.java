@@ -1,4 +1,4 @@
-package org.softuni.timeTracker.areas.time;
+package org.softuni.timeTracker.areas.time.entities;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -21,6 +21,8 @@ public class Project {
     private String project;
 
     private String descrioptio;
+
+    private Boolean enabled;
 
 
     @ManyToMany
@@ -47,5 +49,21 @@ public class Project {
 
     public void setActivities(List<Activity> activities) {
         this.activities = activities;
+    }
+
+    public String getDescrioptio() {
+        return descrioptio;
+    }
+
+    public void setDescrioptio(String descrioptio) {
+        this.descrioptio = descrioptio;
+    }
+
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
     }
 }
