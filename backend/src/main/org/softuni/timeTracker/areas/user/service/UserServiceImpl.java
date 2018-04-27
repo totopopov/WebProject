@@ -7,6 +7,7 @@ import org.softuni.timeTracker.areas.user.model.EditUserBindingModel;
 import org.softuni.timeTracker.areas.user.model.RegisterUserBindingModel;
 import org.softuni.timeTracker.areas.user.repository.UserRepository;
 import org.softuni.timeTracker.utils.ModelParser;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -20,6 +21,8 @@ import java.util.stream.Collectors;
 @Service
 @Transactional
 public class UserServiceImpl implements UserService {
+    public static final String ADMIN = "admin";
+    public static final String USERNAME_WAS_NOT_FOUND = "Username was not found.";
     private final UserRepository userRepository;
 
     private final ModelParser modelParser;
@@ -40,7 +43,7 @@ public class UserServiceImpl implements UserService {
         User user = this.userRepository.findByUsername(username);
 
         if (user == null) {
-            throw new UsernameNotFoundException("Username was not found.");
+            throw new UsernameNotFoundException(USERNAME_WAS_NOT_FOUND);
         }
 
         return user;
@@ -67,8 +70,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<EditUserBindingModel> getAllUsers(String username) {
-        List<User> users = this.userRepository.findAllByUsernameIsNotAndUsernameIsNot(username, "admin");
+    public List<EditUserBindingModel> getAllUsers() {
+        List<User> users = this.userRepository.
+                findAllByUsernameIsNotAndUsernameIsNot(SecurityContextHolder.getContext().getAuthentication().
+                getPrincipal().toString(), ADMIN);
         List<EditUserBindingModel> usersDto = this.modelParser.
                 map(users,
                         EditUserBindingModel.class);
@@ -91,6 +96,21 @@ public class UserServiceImpl implements UserService {
         User user = this.userRepository.findByUsername(username);
         Role role = this.roleService.getRole(RoleEnum.ADMIN);
         user.removeRole(role);
+        return this.modelParser.map(this.userRepository.save(user), EditUserBindingModel.class);
+    }
+
+
+    @Override
+    public EditUserBindingModel deactivate(String username) {
+        User user = this.userRepository.findByUsername(username);
+        user.setEnabled(Boolean.FALSE);
+        return this.modelParser.map(this.userRepository.save(user), EditUserBindingModel.class);
+    }
+
+    @Override
+    public EditUserBindingModel activate(String username) {
+        User user = this.userRepository.findByUsername(username);
+        user.setEnabled(Boolean.TRUE);
         return this.modelParser.map(this.userRepository.save(user), EditUserBindingModel.class);
     }
 

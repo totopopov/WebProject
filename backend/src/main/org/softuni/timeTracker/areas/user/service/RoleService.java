@@ -20,7 +20,7 @@ public class RoleService {
         this.roleRepository = roleRepository;
     }
 
-    public Role getRole(RoleEnum roleEnum) {
+    Role getRole(RoleEnum roleEnum) {
         return this.roleRepository.findByAuthority(roleEnum.getRoleName());
     }
 

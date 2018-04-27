@@ -1,12 +1,14 @@
 package org.softuni.timeTracker.areas.user.entities;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.softuni.timeTracker.areas.time.TimeUnit;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -35,6 +37,9 @@ public class User implements UserDetails {
     private Boolean credentialsNonExpired;
 
     private Boolean enabled;
+
+    @OneToMany(mappedBy = "user")
+    private List<TimeUnit> timeUnits;
 
 
     @ManyToMany(fetch = FetchType.EAGER)
@@ -114,6 +119,14 @@ public class User implements UserDetails {
 
     public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public List<TimeUnit> getTimeUnits() {
+        return timeUnits;
+    }
+
+    public void setTimeUnits(List<TimeUnit> timeUnits) {
+        this.timeUnits = timeUnits;
     }
 
     @Transient

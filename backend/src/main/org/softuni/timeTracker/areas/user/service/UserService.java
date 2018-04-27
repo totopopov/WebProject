@@ -11,9 +11,13 @@ public interface UserService extends UserDetailsService {
 
     boolean userExists(String username);
 
-    List<EditUserBindingModel> getAllUsers(String username);
+    List<EditUserBindingModel> getAllUsers();
 
     EditUserBindingModel promote(String username);
 
     EditUserBindingModel demote(String username);
+
+    EditUserBindingModel deactivate(String username);
+
+    EditUserBindingModel activate(String username);
 }

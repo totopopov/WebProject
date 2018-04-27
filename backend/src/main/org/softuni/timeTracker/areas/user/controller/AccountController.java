@@ -1,7 +1,6 @@
 package org.softuni.timeTracker.areas.user.controller;
 
 import com.google.gson.Gson;
-import org.softuni.timeTracker.areas.user.model.EditUserBindingModel;
 import org.softuni.timeTracker.areas.user.model.RegisterUserBindingModel;
 import org.softuni.timeTracker.areas.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,32 +57,4 @@ public class AccountController {
 
         return ResponseEntity.ok(gson.toJson(authorities));
     }
-
-
-    @GetMapping(value = "/admin/users", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity getUsers() {
-
-        List<EditUserBindingModel> allUsers = this.userService.getAllUsers(SecurityContextHolder.getContext().getAuthentication().
-                getPrincipal().toString());
-
-        return ResponseEntity.ok(gson.toJson(allUsers));
-    }
-
-    @GetMapping(value = "/admin/promote/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity promote(@PathVariable String name) {
-
-        EditUserBindingModel user = this.userService.promote(name);
-
-        return ResponseEntity.ok(gson.toJson(user));
-    }
-
-    @GetMapping(value = "/admin/demote/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity demote(@PathVariable String name) {
-
-        EditUserBindingModel user = this.userService.demote(name);
-
-        return ResponseEntity.ok(gson.toJson(user));
-    }
-
-
 }

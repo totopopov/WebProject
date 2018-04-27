@@ -3,19 +3,19 @@ var app = app || {};
 function handleRoute(e) {
     let urlPath = window.location.hash.substr(0,
         (window.location.hash.indexOf('?') >= 0
-        ? window.location.hash.indexOf('?')
-        : window.location.hash.length));
+            ? window.location.hash.indexOf('?')
+            : window.location.hash.length));
 
-    if(routeMap[urlPath]) {
+    if (routeMap[urlPath]) {
         let entry = routeMap[urlPath];
 
-        if(!entry['callback']) return;
+        if (!entry['callback']) return;
 
-        if(entry['parameters']) {
+        if (entry['parameters']) {
             let extractedParams = [];
 
             entry['parameters'].forEach(x => {
-                if(app.queryUtility.queryParameter(x) != null) {
+                if (app.queryUtility.queryParameter(x) != null) {
                     extractedParams.push(app.queryUtility.queryParameter(x));
                 }
             });
@@ -39,7 +39,7 @@ app.router = (function () {
                 callback: callback
             }
         },
-        redirect: function(route) {
+        redirect: function (route) {
             window.location.hash = route;
         }
     }

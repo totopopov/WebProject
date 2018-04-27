@@ -155,14 +155,21 @@ function renderRowForAdminUserTable(entry) {
     let rowRole = $('<td>' + (role ? 'admin' : 'user') + '</td>');
     let rowEnabled = $('<td>' + (userEnabled ? 'active' : 'deleted') + '</td>');
 
-    let buttonPromote = $('<a href="#/admin/' +
+    let buttonPromote = $('<a href="#/admin/?action=' +
         (role ? 'demote' : 'promote')
-        + '?id=' + username + '" class="btn btn-' + (role ? 'warning' : 'danger') + ' btn-sm" role="button">' +
+        + '&id=' + username + '" class="btn btn-' + (role ? 'warning' : 'danger') + ' btn-sm" role="button">' +
         (role ? 'Demote Admin' : 'Promote to Admin')
         + '</a>');
 
-    let rowActions = $('<td></td>');
+    let buttonActivate = $('<a href="#/admin/?action=' +
+        (userEnabled ? 'deactivate' : 'activate')
+        + '&id=' + username + '" class="btn btn-' + (userEnabled ? 'danger' : 'warning') + ' btn-sm" role="button">' +
+        (userEnabled ? 'Deactivate' : 'Activate')
+        + '</a>');
+
+    let rowActions = $('<td class="d-flex justify-content-between"></td>');
     rowActions.append(buttonPromote);
+    rowActions.append(buttonActivate);
     row.append(rowName);
     row.append(rowRole);
     row.append(rowEnabled);
@@ -205,8 +212,6 @@ app.router.on("#/logout", null, function () {
 
 app.router.on("#/admin/users", null, function () {
 
-
-    //handle error
     if (!app.authorizationService.isAdmin()) {
         app.router.redirect('#/');
         return;
@@ -236,16 +241,41 @@ app.router.on("#/admin/users", null, function () {
 });
 
 
-app.router.on("#/admin/promote", ['id'], function (id) {
+app.router.on("#/admin/activities", null, function () {
 
     if (!app.authorizationService.isAdmin()) {
         app.router.redirect('#/');
         return;
 
     }
+    app.templateLoader.loadTemplate('.app', 'activities', function () {
+
+            app.callServize.sendGET('/admin/activities', function (data) {
+
+                console.log(data);
+
+                // let tableBody = $('#table-users-admin');
+                //
+                // for (let entry of data) {
+                //
+                //     let row = renderRowForAdminUserTable(entry);
+                //     tableBody.append(row);
+                // }
+
+            }, function (xhr, status, error) {
+
+                showEror(xhr);
+
+            });
+        }
+    );
+
+});
 
 
-    app.callServize.sendGET('/admin/promote/' + id, function (data) {
+
+function adminAction(action, id) {
+    app.callServize.sendGET('/admin/' + action + '/' + id, function (data) {
 
 
         let tableBody = $('#table-users-admin');
@@ -257,31 +287,19 @@ app.router.on("#/admin/promote", ['id'], function (id) {
         showEror(xhr);
 
     });
+}
 
-});
 
-
-app.router.on("#/admin/demote", ['id'], function (id) {
+app.router.on("#/admin/", ['action', 'id'], function (action, id) {
 
     if (!app.authorizationService.isAdmin()) {
         app.router.redirect('#/');
         return;
     }
 
-
-    app.callServize.sendGET('/admin/demote/' + id, function (data) {
-
-        let tableBody = $('#table-users-admin');
-        let row = renderRowForAdminUserTable(data);
-
-    }, function (xhr, status, error) {
-
-        showEror(xhr);
-
-    });
+    adminAction(action, id);
 
 });
-
 
 
 app.router.on("#/login", null, function () {
