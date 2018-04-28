@@ -2,8 +2,8 @@ package org.softuni.timeTracker.areas.time.controller;
 
 
 import com.google.gson.Gson;
-import org.softuni.timeTracker.areas.time.entities.TimeUnit;
 import org.softuni.timeTracker.areas.time.models.timeUnit.RegisterTimeUnitBindingModel;
+import org.softuni.timeTracker.areas.time.models.timeUnit.TimeUnitSimpleTransferModel;
 import org.softuni.timeTracker.areas.time.service.TimeUnitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -37,8 +37,8 @@ public class TimeUnitController {
     public ResponseEntity register(@RequestBody @Valid RegisterTimeUnitBindingModel entry, BindingResult bindingResult) {
 
         if (!bindingResult.hasErrors()) {
-            TimeUnit timeUnit = this.timeUnitService.registerEntry(entry);
-            return ResponseEntity.ok(gson.toJson(timeUnit));
+            TimeUnitSimpleTransferModel timeUnitSimpleTransferModel = this.timeUnitService.registerEntry(entry);
+            return ResponseEntity.ok(gson.toJson(timeUnitSimpleTransferModel));
         } else {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body(gson.toJson(bindingResult.getAllErrors().get(0).getDefaultMessage()));

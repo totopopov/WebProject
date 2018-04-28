@@ -452,12 +452,13 @@ app.router.on("#/entry/create", null, function () {
     app.callServize.sendPOST('/entry/create', sendData, (data) => {
 
 
-        let tableBody = $('#table-projects-admin');
-        let row = renderRowForAdminProjectTable(data);
-        tableBody.prepend(row);
-
-        projectName.val('');
-        projectDescription.val('');
+        let tableBody = $('#table-daily');
+        console.log(data);
+        // let row = renderRowForAdminProjectTable(data);
+        // tableBody.prepend(row);
+        //
+        // projectName.val('');
+        // projectDescription.val('');
 
     }, (xhr, status, error) => {
 

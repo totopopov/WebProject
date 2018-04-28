@@ -30,15 +30,15 @@ public class TimeUnit {
 
     private String comments;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "project_id", referencedColumnName = "id", nullable = false)
     private Project project;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "activity_id", referencedColumnName = "id", nullable = false)
     private Activity activity;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
     private User user;
 
@@ -103,5 +103,15 @@ public class TimeUnit {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    @Transient
+    public String getSimpleProject() {
+        return this.project.getProject();
+    }
+
+    @Transient
+    public String getSimpleActivity() {
+        return this.activity.getActivity();
     }
 }

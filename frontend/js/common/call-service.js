@@ -5,6 +5,10 @@ function logOutUser(data) {
         app.authorizationService.clearAuth();
         showEror(data);
     }
+
+    if (data['status'] === 418) {
+        showEror(data);
+    }
 }
 
 app.callServize = (function callServize() {

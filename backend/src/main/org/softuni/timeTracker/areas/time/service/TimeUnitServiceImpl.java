@@ -5,6 +5,7 @@ import org.softuni.timeTracker.areas.time.entities.Activity;
 import org.softuni.timeTracker.areas.time.entities.Project;
 import org.softuni.timeTracker.areas.time.entities.TimeUnit;
 import org.softuni.timeTracker.areas.time.models.timeUnit.RegisterTimeUnitBindingModel;
+import org.softuni.timeTracker.areas.time.models.timeUnit.TimeUnitSimpleTransferModel;
 import org.softuni.timeTracker.areas.time.repository.TimeUnitRepository;
 import org.softuni.timeTracker.areas.user.entities.User;
 import org.softuni.timeTracker.areas.user.service.UserService;
@@ -40,7 +41,7 @@ public class TimeUnitServiceImpl implements TimeUnitService {
 
 
     @Override
-    public TimeUnit registerEntry(RegisterTimeUnitBindingModel entry) {
+    public TimeUnitSimpleTransferModel registerEntry(RegisterTimeUnitBindingModel entry) {
         TimeUnit mapedEntry = this.modelParser.map(entry, TimeUnit.class);
         Project project = this.projectService.findProject(entry.getProject());
         Activity activity = this.activityService.findActivity(entry.getActivity());
@@ -50,6 +51,6 @@ public class TimeUnitServiceImpl implements TimeUnitService {
         mapedEntry.setProject(project);
         mapedEntry.setUser(user);
         this.timeUnitRepository.save(mapedEntry);
-        return mapedEntry;
+        return this.modelParser.map(mapedEntry, TimeUnitSimpleTransferModel.class);
     }
 }

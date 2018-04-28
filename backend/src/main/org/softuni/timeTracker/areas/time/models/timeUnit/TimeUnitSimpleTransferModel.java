@@ -1,11 +1,5 @@
 package org.softuni.timeTracker.areas.time.models.timeUnit;
 
-import org.softuni.timeTracker.areas.time.entities.customValidator.ConfirmTImeUnitTime;
-import org.springframework.format.annotation.DateTimeFormat;
-
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.PastOrPresent;
 import java.util.Date;
 
 /**
@@ -13,28 +7,22 @@ import java.util.Date;
  */
 
 
-public class RegisterTimeUnitBindingModel {
+public class TimeUnitSimpleTransferModel {
 
-    @NotNull
-    @PastOrPresent
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+
     private Date date;
 
-    @ConfirmTImeUnitTime
     private Double time;
 
-    @Min(value = 0)
     private Integer taskCompleted;
 
     private String comments;
 
-    @NotNull
-    private String project;
+    private String SimpleProject;
 
-    @NotNull
-    private String activity;
+    private String SimpleActiivy;
 
-    public RegisterTimeUnitBindingModel() {
+    public TimeUnitSimpleTransferModel() {
     }
 
     public Date getDate() {
@@ -69,19 +57,19 @@ public class RegisterTimeUnitBindingModel {
         this.comments = comments;
     }
 
-    public String getProject() {
-        return project;
+    public String getSimpleProject() {
+        return SimpleProject;
     }
 
-    public void setProject(String project) {
-        this.project = project;
+    public void setSimpleProject(String simpleProject) {
+        SimpleProject = simpleProject;
     }
 
-    public String getActivity() {
-        return activity;
+    public String getSimpleActiivy() {
+        return SimpleActiivy;
     }
 
-    public void setActivity(String activity) {
-        this.activity = activity;
+    public void setSimpleActiivy(String simpleActiivy) {
+        SimpleActiivy = simpleActiivy;
     }
 }
