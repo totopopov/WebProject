@@ -1,6 +1,7 @@
 package org.softuni.timeTracker.areas.user.controller;
 
 import com.google.gson.Gson;
+import org.softuni.timeTracker.annotations.GetIP;
 import org.softuni.timeTracker.areas.user.models.RegisterUserBindingModel;
 import org.softuni.timeTracker.areas.user.service.UserService;
 import org.softuni.timeTracker.constants.Const;
@@ -32,6 +33,7 @@ public class AccountController {
         this.gson = gson;
     }
 
+    @GetIP
     @PostMapping(value = "/register", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity register(@RequestBody @Valid RegisterUserBindingModel user, BindingResult bindingResult) {
         if (!bindingResult.hasErrors()) {

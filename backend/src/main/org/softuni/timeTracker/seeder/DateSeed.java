@@ -24,6 +24,12 @@ import java.util.stream.Collectors;
 @Component
 public class DateSeed {
 
+    public static final String USER_LOG = " ==================== userLog: ";
+    public static final String USERS_SEEDING_NOT_REQUIRED = "Users Seeding Not Required";
+    public static final String USER_SEEDED = "User Seeded";
+    public static final String ADMIN = "admin";
+    public static final String ROLES_SEED_NOT_REQUIRED = "Roles seed not required";
+    public static final String ROLSE_SEED = "Rolse seed";
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -63,23 +69,24 @@ public class DateSeed {
                 newRole.setAuthority(role);
                 roleRepository.save(newRole);
             }
-            this.declareMessage("Rolse seed");
+            this.declareMessage(ROLSE_SEED);
         } else {
-            this.declareMessage("Roles seed not required");
+
+            this.declareMessage(ROLES_SEED_NOT_REQUIRED);
         }
     }
 
 
     private void seedUsersTable() {
 
-        User u = userRepository.findByUsername("admin");
+        User u = userRepository.findByUsername(ADMIN);
 
         List<Role> roles = roleRepository.findAll();
 
         if (u == null) {
             User user = new User();
-            user.setUsername("admin");
-            user.setPassword(this.bCryptPasswordEncoder.encode("admin"));
+            user.setUsername(ADMIN);
+            user.setPassword(this.bCryptPasswordEncoder.encode(ADMIN));
             user.setRoles(new HashSet<>(roles));
             user.setAccountNonExpired(true);
             user.setCredentialsNonExpired(true);
@@ -87,13 +94,13 @@ public class DateSeed {
             user.setAccountNonLocked(true);
 
             userRepository.save(user);
-            this.declareMessage("User Seeded");
+            this.declareMessage(USER_SEEDED);
         } else {
-            this.declareMessage("Users Seeding Not Required");
+            this.declareMessage(USERS_SEEDING_NOT_REQUIRED);
         }
     }
 
     private void declareMessage(String message) {
-        System.out.println(new Date() + " ==================== userLog: " + message);
+        System.out.println(new Date() + USER_LOG + message);
     }
 }

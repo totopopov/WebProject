@@ -1,7 +1,5 @@
 package org.softuni.timeTracker.areas.time.models.timeUnit;
 
-import java.util.Date;
-
 /**
  * Created by Todor Popov using Lenovo on 28.4.2018 г. at 8:07.
  */
@@ -9,8 +7,7 @@ import java.util.Date;
 
 public class TimeUnitSimpleTransferModel {
 
-
-    private Date date;
+    private String dateFormated;
 
     private Double time;
 
@@ -20,17 +17,17 @@ public class TimeUnitSimpleTransferModel {
 
     private String simpleProject;
 
-    private String simpleActiivy;
+    private String simpleActivity;
 
     public TimeUnitSimpleTransferModel() {
     }
 
-    public Date getDate() {
-        return date;
+    public String getDateFormated() {
+        return dateFormated;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setDateFormated(String dateFormated) {
+        this.dateFormated = dateFormated;
     }
 
     public Double getTime() {
@@ -65,12 +62,11 @@ public class TimeUnitSimpleTransferModel {
         this.simpleProject = simpleProject;
     }
 
-    public String getSimpleActiivy() {
-        return simpleActiivy;
+    public String getSimpleActivity() {
+        return simpleActivity;
     }
 
-    public void setSimpleActiivy(String simpleActiivy) {
-        this.simpleActiivy = simpleActiivy;
+    public void setSimpleActivity(String simpleActivity) {
+        this.simpleActivity = simpleActivity;
     }
-
 }

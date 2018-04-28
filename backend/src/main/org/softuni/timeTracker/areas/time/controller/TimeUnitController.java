@@ -10,11 +10,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * Created by Todor Popov using Lenovo on 28.4.2018 г. at 5:50.
@@ -43,5 +45,14 @@ public class TimeUnitController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body(gson.toJson(bindingResult.getAllErrors().get(0).getDefaultMessage()));
         }
+    }
+
+    @GetMapping(value = "/entries", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity getAllEtnries() {
+
+        List<TimeUnitSimpleTransferModel> allEntries = this.timeUnitService.getAllEntries();
+
+        return ResponseEntity.ok(gson.toJson(allEntries));
+
     }
 }

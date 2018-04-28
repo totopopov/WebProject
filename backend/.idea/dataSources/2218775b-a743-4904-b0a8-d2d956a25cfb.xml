@@ -957,250 +957,314 @@
     <table id="244" parent="21" name="activities">
       <Engine>InnoDB</Engine>
     </table>
-    <table id="245" parent="21" name="project">
+    <table id="245" parent="21" name="logger">
       <Engine>InnoDB</Engine>
     </table>
-    <table id="246" parent="21" name="project_activities">
+    <table id="246" parent="21" name="project">
       <Engine>InnoDB</Engine>
     </table>
-    <table id="247" parent="21" name="roles">
+    <table id="247" parent="21" name="project_activities">
       <Engine>InnoDB</Engine>
     </table>
-    <table id="248" parent="21" name="time_unit">
+    <table id="248" parent="21" name="roles">
       <Engine>InnoDB</Engine>
     </table>
-    <table id="249" parent="21" name="users">
+    <table id="249" parent="21" name="time_unit">
       <Engine>InnoDB</Engine>
     </table>
-    <table id="250" parent="21" name="users_roles">
+    <table id="250" parent="21" name="users">
       <Engine>InnoDB</Engine>
     </table>
-    <column id="251" parent="244" name="id">
+    <table id="251" parent="21" name="users_roles">
+      <Engine>InnoDB</Engine>
+    </table>
+    <column id="252" parent="244" name="id">
       <Position>1</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="252" parent="244" name="activity">
+    <column id="253" parent="244" name="activity">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="253" parent="244" name="activitykpi">
+    <column id="254" parent="244" name="activitykpi">
       <Position>3</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="254" parent="244" name="PRIMARY">
+    <column id="255" parent="244" name="description">
+      <Position>4</Position>
+      <DataType>varchar(255)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="256" parent="244" name="enabled">
+      <Position>5</Position>
+      <DataType>bit(1)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <key id="257" parent="244" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="255" parent="245" name="id">
+    <column id="258" parent="245" name="id">
       <Position>1</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="256" parent="245" name="project">
+    <column id="259" parent="245" name="ip">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="257" parent="245" name="PRIMARY">
+    <column id="260" parent="245" name="local_date_time">
+      <Position>3</Position>
+      <DataType>datetime|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <key id="261" parent="245" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="258" parent="246" name="project_id">
+    <column id="262" parent="246" name="id">
       <Position>1</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="259" parent="246" name="activty_id">
+    <column id="263" parent="246" name="description">
+      <Position>2</Position>
+      <DataType>varchar(255)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="264" parent="246" name="enabled">
+      <Position>3</Position>
+      <DataType>bit(1)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="265" parent="246" name="project">
+      <Position>4</Position>
+      <DataType>varchar(255)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <key id="266" parent="246" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="267" parent="247" name="project_id">
+      <Position>1</Position>
+      <DataType>varchar(255)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="268" parent="247" name="activty_id">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="260" parent="246" name="FKdx3cfaq1ujob79u8pon8hxhkp">
+    <index id="269" parent="247" name="FKdx3cfaq1ujob79u8pon8hxhkp">
       <ColNames>project_id</ColNames>
     </index>
-    <index id="261" parent="246" name="FKq6chk4i9b430bq32i2repxvi1">
+    <index id="270" parent="247" name="FKq6chk4i9b430bq32i2repxvi1">
       <ColNames>activty_id</ColNames>
     </index>
-    <foreign-key id="262" parent="246" name="FKdx3cfaq1ujob79u8pon8hxhkp">
+    <foreign-key id="271" parent="247" name="FKdx3cfaq1ujob79u8pon8hxhkp">
       <ColNames>project_id</ColNames>
       <RefSchemaName>time_tracker</RefSchemaName>
       <RefTableName>project</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="263" parent="246" name="FKq6chk4i9b430bq32i2repxvi1">
+    <foreign-key id="272" parent="247" name="FKq6chk4i9b430bq32i2repxvi1">
       <ColNames>activty_id</ColNames>
       <RefSchemaName>time_tracker</RefSchemaName>
       <RefTableName>activities</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="264" parent="247" name="id">
+    <column id="273" parent="248" name="id">
       <Position>1</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="265" parent="247" name="authority">
+    <column id="274" parent="248" name="authority">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="266" parent="247" name="UK_r261muslviw4d89p3xlvagqof">
+    <index id="275" parent="248" name="UK_r261muslviw4d89p3xlvagqof">
       <ColNames>authority</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="267" parent="247" name="PRIMARY">
+    <key id="276" parent="248" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="268" parent="247" name="UK_r261muslviw4d89p3xlvagqof">
+    <key id="277" parent="248" name="UK_r261muslviw4d89p3xlvagqof">
       <ColNames>authority</ColNames>
       <UnderlyingIndexName>UK_r261muslviw4d89p3xlvagqof</UnderlyingIndexName>
     </key>
-    <column id="269" parent="248" name="id">
+    <column id="278" parent="249" name="id">
       <Position>1</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="270" parent="248" name="date">
+    <column id="279" parent="249" name="comments">
       <Position>2</Position>
-      <DataType>datetime|0s</DataType>
+      <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="271" parent="248" name="task_completed">
+    <column id="280" parent="249" name="date">
       <Position>3</Position>
+      <DataType>date|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="281" parent="249" name="task_completed">
+      <Position>4</Position>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="272" parent="248" name="time">
-      <Position>4</Position>
+    <column id="282" parent="249" name="time">
+      <Position>5</Position>
       <DataType>double|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="273" parent="248" name="project_id">
-      <Position>5</Position>
-      <DataType>varchar(255)|0s</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="274" parent="248" name="user_id">
+    <column id="283" parent="249" name="activity_id">
       <Position>6</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="275" parent="248" name="FK2dyuup4pugssfvtq4uanbeli6">
-      <ColNames>project_id</ColNames>
-    </index>
-    <index id="276" parent="248" name="FK9n7ii2dx7npxnmf2bk3nfh0bv">
-      <ColNames>user_id</ColNames>
-    </index>
-    <key id="277" parent="248" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <ColNames>id</ColNames>
-      <Primary>1</Primary>
-    </key>
-    <foreign-key id="278" parent="248" name="FK2dyuup4pugssfvtq4uanbeli6">
-      <ColNames>project_id</ColNames>
-      <RefSchemaName>time_tracker</RefSchemaName>
-      <RefTableName>project</RefTableName>
-      <RefColNames>id</RefColNames>
-    </foreign-key>
-    <foreign-key id="279" parent="248" name="FK9n7ii2dx7npxnmf2bk3nfh0bv">
-      <ColNames>user_id</ColNames>
-      <RefSchemaName>time_tracker</RefSchemaName>
-      <RefTableName>users</RefTableName>
-      <RefColNames>id</RefColNames>
-    </foreign-key>
-    <column id="280" parent="249" name="id">
-      <Position>1</Position>
-      <DataType>varchar(255)|0s</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="281" parent="249" name="account_non_expired">
-      <Position>2</Position>
-      <DataType>bit(1)|0s</DataType>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="282" parent="249" name="account_non_locked">
-      <Position>3</Position>
-      <DataType>bit(1)|0s</DataType>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="283" parent="249" name="credentials_non_expired">
-      <Position>4</Position>
-      <DataType>bit(1)|0s</DataType>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="284" parent="249" name="enabled">
-      <Position>5</Position>
-      <DataType>bit(1)|0s</DataType>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="285" parent="249" name="password">
-      <Position>6</Position>
-      <DataType>varchar(255)|0s</DataType>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="286" parent="249" name="username">
+    <column id="284" parent="249" name="project_id">
       <Position>7</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="287" parent="249" name="UK_r43af9ap4edm43mmtq01oddj6">
-      <ColNames>username</ColNames>
-      <Unique>1</Unique>
+    <column id="285" parent="249" name="user_id">
+      <Position>8</Position>
+      <DataType>varchar(255)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <index id="286" parent="249" name="FKialshn8box6ys7ceupf6pftl">
+      <ColNames>activity_id</ColNames>
     </index>
-    <key id="288" parent="249" name="PRIMARY">
+    <index id="287" parent="249" name="FK2dyuup4pugssfvtq4uanbeli6">
+      <ColNames>project_id</ColNames>
+    </index>
+    <index id="288" parent="249" name="FK9n7ii2dx7npxnmf2bk3nfh0bv">
+      <ColNames>user_id</ColNames>
+    </index>
+    <key id="289" parent="249" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="289" parent="249" name="UK_r43af9ap4edm43mmtq01oddj6">
-      <ColNames>username</ColNames>
-      <UnderlyingIndexName>UK_r43af9ap4edm43mmtq01oddj6</UnderlyingIndexName>
-    </key>
-    <column id="290" parent="250" name="user_id">
-      <Position>1</Position>
-      <DataType>varchar(255)|0s</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="291" parent="250" name="role_id">
-      <Position>2</Position>
-      <DataType>varchar(255)|0s</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <index id="292" parent="250" name="FKj6m8fwv7oqv74fcehir1a9ffy">
-      <ColNames>role_id</ColNames>
-    </index>
-    <key id="293" parent="250" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <ColNames>user_id
-role_id</ColNames>
-      <Primary>1</Primary>
-    </key>
-    <foreign-key id="294" parent="250" name="FK2o0jvgh89lemvvo17cbqvdxaa">
+    <foreign-key id="290" parent="249" name="FKialshn8box6ys7ceupf6pftl">
+      <ColNames>activity_id</ColNames>
+      <RefSchemaName>time_tracker</RefSchemaName>
+      <RefTableName>activities</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <foreign-key id="291" parent="249" name="FK2dyuup4pugssfvtq4uanbeli6">
+      <ColNames>project_id</ColNames>
+      <RefSchemaName>time_tracker</RefSchemaName>
+      <RefTableName>project</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <foreign-key id="292" parent="249" name="FK9n7ii2dx7npxnmf2bk3nfh0bv">
       <ColNames>user_id</ColNames>
       <RefSchemaName>time_tracker</RefSchemaName>
       <RefTableName>users</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="295" parent="250" name="FKj6m8fwv7oqv74fcehir1a9ffy">
+    <column id="293" parent="250" name="id">
+      <Position>1</Position>
+      <DataType>varchar(255)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="294" parent="250" name="account_non_expired">
+      <Position>2</Position>
+      <DataType>bit(1)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="295" parent="250" name="account_non_locked">
+      <Position>3</Position>
+      <DataType>bit(1)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="296" parent="250" name="credentials_non_expired">
+      <Position>4</Position>
+      <DataType>bit(1)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="297" parent="250" name="enabled">
+      <Position>5</Position>
+      <DataType>bit(1)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="298" parent="250" name="password">
+      <Position>6</Position>
+      <DataType>varchar(255)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="299" parent="250" name="username">
+      <Position>7</Position>
+      <DataType>varchar(255)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <index id="300" parent="250" name="UK_r43af9ap4edm43mmtq01oddj6">
+      <ColNames>username</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="301" parent="250" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="302" parent="250" name="UK_r43af9ap4edm43mmtq01oddj6">
+      <ColNames>username</ColNames>
+      <UnderlyingIndexName>UK_r43af9ap4edm43mmtq01oddj6</UnderlyingIndexName>
+    </key>
+    <column id="303" parent="251" name="user_id">
+      <Position>1</Position>
+      <DataType>varchar(255)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="304" parent="251" name="role_id">
+      <Position>2</Position>
+      <DataType>varchar(255)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <index id="305" parent="251" name="FKj6m8fwv7oqv74fcehir1a9ffy">
+      <ColNames>role_id</ColNames>
+    </index>
+    <key id="306" parent="251" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>user_id
+role_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="307" parent="251" name="FK2o0jvgh89lemvvo17cbqvdxaa">
+      <ColNames>user_id</ColNames>
+      <RefSchemaName>time_tracker</RefSchemaName>
+      <RefTableName>users</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <foreign-key id="308" parent="251" name="FKj6m8fwv7oqv74fcehir1a9ffy">
       <ColNames>role_id</ColNames>
       <RefSchemaName>time_tracker</RefSchemaName>
       <RefTableName>roles</RefTableName>

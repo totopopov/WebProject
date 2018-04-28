@@ -7,7 +7,7 @@ body {
 
 }
 
-.very-fit{
+.very-fit {
     width: 100px;
 }
 
@@ -21,6 +21,7 @@ a.link-home:hover, a.link-home:active {
     color: blue;
     z-index: 201;
 }
+
 
 .text-red {
     color: #e9003b;
@@ -85,8 +86,8 @@ a.link-home:hover, a.link-home:active {
 }
 
 /*html {*/
-    /*overflow: hidden;*/
-    /*font-family: 'BenchNine', sans-serif;*/
+/*overflow: hidden;*/
+/*font-family: 'BenchNine', sans-serif;*/
 /*}*/
 
 .clock-container {

@@ -5,6 +5,7 @@ import org.softuni.timeTracker.areas.user.entities.User;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
@@ -113,5 +114,11 @@ public class TimeUnit {
     @Transient
     public String getSimpleActivity() {
         return this.activity.getActivity();
+    }
+
+    @Transient
+    public String getDateFormated() {
+        SimpleDateFormat dt = new SimpleDateFormat("dd-MM-yyyy");
+        return dt.format(this.date);
     }
 }

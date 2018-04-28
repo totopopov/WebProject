@@ -15,6 +15,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * Created by Todor Popov using Lenovo on 27.4.2018 г. at 14:06.
  */
@@ -52,5 +54,14 @@ public class TimeUnitServiceImpl implements TimeUnitService {
         mapedEntry.setUser(user);
         this.timeUnitRepository.save(mapedEntry);
         return this.modelParser.map(mapedEntry, TimeUnitSimpleTransferModel.class);
+    }
+
+    @Override
+    public List<TimeUnitSimpleTransferModel> getAllEntries() {
+        User user = this.userService.userByName(SecurityContextHolder.getContext().getAuthentication().
+                getPrincipal().toString());
+        List<TimeUnit> all = this.timeUnitRepository.getAllByUserEquals(user);
+        List<TimeUnitSimpleTransferModel> mappedEntries = this.modelParser.map(all, TimeUnitSimpleTransferModel.class);
+        return mappedEntries;
     }
 }

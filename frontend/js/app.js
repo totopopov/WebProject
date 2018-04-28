@@ -1,6 +1,8 @@
 let constants = {
     serviceUrl: "http://localhost:8080"
+
 };
+
 
 let confirmPasswordCheckStatusOk = false;
 let passwordCheckStatusOk = false;
@@ -257,21 +259,22 @@ function renderRowForAdminProjectActivityTable(entry, idProject, activities) {
 
 function renderRowForUserTable(entry) {
 
+
     let project = entry['simpleProject'];
     let comment = entry['comments'];
-    let date = entry['date'];
+    let date = (entry['dateFormated']);
     let task = entry['taskCompleted'];
     let time = entry['time'];
     let activity = entry['simpleActivity'];
 
-    let rowDate = $('<td class="">' + date + '</td>');
+    let rowDate = $('<td >' + date + '</td>');
     let rowProject = $('<td>' + project + '</td>');
     let rowActivity = $('<td>' + activity + '</td>');
     let rowTime = $('<td>' + time + '</td>');
     let rowTask = $('<td>' + task + '</td>');
     let rowComment = $('<td>' + comment + '</td>');
 
-    let row = $('<tr></tr>>')
+    let row = $('<tr class="text-center"></tr>>');
 
     row.append(rowDate);
     row.append(rowProject);
@@ -342,7 +345,6 @@ app.router.on("#/home", null, function () {
 
             $('#daily-date').val(new Date().toDateInputValue());
 
-            let tableBody = $('#table-projects-admin');
             let selectProject = $('#selectProject');
             let selectActivity = $('#selectActivity');
 
@@ -377,21 +379,17 @@ app.router.on("#/home", null, function () {
 
         });
 
-        app.callServize.sendGET('/projects', function (data) {
+        app.callServize.sendGET('/entries', function (data) {
 
-            $('#daily-date').val(new Date().toDateInputValue());
+            let tableBody = $('#table-daily');
 
-            // for (let entry of data) {
-            //
-            //     let row = renderRowForAdminProjectTable(entry);
-            //     tableBody.append(row);
-            // }
+            for (let entry of data) {
 
-        }, function (xhr, status, error) {
+                let row = renderRowForUserTable(entry);
+                tableBody.append(row);
+            }
 
-            showEror(xhr);
-
-        });
+        }, null);
 
     });
 });
@@ -399,7 +397,7 @@ app.router.on("#/home", null, function () {
 
 app.router.on("#/entry/create", null, function () {
 
-    if (!app.authorizationService.isAdmin()) {
+    if (!app.authorizationService.isAuthorized()) {
         app.router.redirect('#/');
         return;
 
@@ -424,7 +422,7 @@ app.router.on("#/entry/create", null, function () {
     });
 
     app.callServize.sendPOST('/entry/create', sendData, (data) => {
-
+        console.log(sendData);
 
         let tableBody = $('#table-daily');
 
