@@ -18,9 +18,9 @@ public class TimeUnitSimpleTransferModel {
 
     private String comments;
 
-    private String SimpleProject;
+    private String simpleProject;
 
-    private String SimpleActiivy;
+    private String simpleActiivy;
 
     public TimeUnitSimpleTransferModel() {
     }
@@ -58,18 +58,19 @@ public class TimeUnitSimpleTransferModel {
     }
 
     public String getSimpleProject() {
-        return SimpleProject;
+        return simpleProject;
     }
 
     public void setSimpleProject(String simpleProject) {
-        SimpleProject = simpleProject;
+        this.simpleProject = simpleProject;
     }
 
     public String getSimpleActiivy() {
-        return SimpleActiivy;
+        return simpleActiivy;
     }
 
     public void setSimpleActiivy(String simpleActiivy) {
-        SimpleActiivy = simpleActiivy;
+        this.simpleActiivy = simpleActiivy;
     }
+
 }

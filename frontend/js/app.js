@@ -255,50 +255,32 @@ function renderRowForAdminProjectActivityTable(entry, idProject, activities) {
     return row;
 }
 
-// function renderRowForAdminProjectActivityTable(entry, idProject, activities) {
-//
-//     let enabled = entry['enabled'];
-//     let activity = entry['activity'];
-//     if (!enabled) {
-//         return;
-//     }
-//
-//     let isPart = false;
-//
-//     for (let projectActivity of activities) {
-//         if (projectActivity === activity) {
-//             isPart = true;
-//             break;
-//         }
-//     }
-//
-//     let activityKPI = entry['activityKPI'];
-//     let description = entry['description'];
-//     let id = entry['id'];
-//
-//
-//     let row = $('#' + id);
-//     row = (row.length === 0 ? $('<tr id="' + id + '"></tr>') : row);
-//     row.empty();
-//     let rowActivity = $('<td>' + activity + '</td>');
-//     let rowActivityKPI = $('<td>' + activityKPI + '</td>');
-//     let rowDescription = $('<td>' + description + '</td>');
-//
-//     let button = $('<a href="#/admin/project?action=' +
-//         (isPart ? 'add' : 'remove') + '&idProject=' + idProject
-//         + '&id=' + id + '" class="btn btn-' + (isPart ? 'danger' : 'warning') + ' " role="button">' +
-//         (isPart ? 'ADD' : 'REMOVE')
-//         + '</a>');
-//
-//
-//     let rowActions = $('<td class="d-flex justify-content-around"></td>');
-//     rowActions.append(button);
-//     row.append(rowActivity);
-//     row.append(rowActivityKPI);
-//     row.append(rowDescription);
-//     row.append(rowActions);
-//     return row;
-// }
+function renderRowForUserTable(entry) {
+
+    let project = entry['simpleProject'];
+    let comment = entry['comments'];
+    let date = entry['date'];
+    let task = entry['taskCompleted'];
+    let time = entry['time'];
+    let activity = entry['simpleActivity'];
+
+    let rowDate = $('<td class="">' + date + '</td>');
+    let rowProject = $('<td>' + project + '</td>');
+    let rowActivity = $('<td>' + activity + '</td>');
+    let rowTime = $('<td>' + time + '</td>');
+    let rowTask = $('<td>' + task + '</td>');
+    let rowComment = $('<td>' + comment + '</td>');
+
+    let row = $('<tr></tr>>')
+
+    row.append(rowDate);
+    row.append(rowProject);
+    row.append(rowActivity);
+    row.append(rowTime);
+    row.append(rowTask);
+    row.append(rowComment);
+    return row;
+}
 
 function renderRowForAdminProjectTable(entry) {
     let project = entry['project'];
@@ -379,7 +361,6 @@ app.router.on("#/home", null, function () {
                     }));
                 }
 
-
             });
 
 
@@ -389,13 +370,6 @@ app.router.on("#/home", null, function () {
                     "text": data[key]['project']
                 }));
             }
-
-
-            // for (let entry of data) {
-            //
-            //     let row = renderRowForAdminProjectTable(entry);
-            //     tableBody.append(row);
-            // }
 
         }, function (xhr, status, error) {
 
@@ -453,12 +427,15 @@ app.router.on("#/entry/create", null, function () {
 
 
         let tableBody = $('#table-daily');
-        console.log(data);
-        // let row = renderRowForAdminProjectTable(data);
-        // tableBody.prepend(row);
-        //
-        // projectName.val('');
-        // projectDescription.val('');
+
+        let row = renderRowForUserTable(data);
+        tableBody.prepend(row);
+
+        let selectProject = $('#selectProject').val('');
+        let selectActivity = $('#selectActivity').val('');
+        let time = $('#time').val('');
+        let task = $('#task').val('');
+        let coment = $('#comment').val('');
 
     }, (xhr, status, error) => {
 

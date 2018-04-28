@@ -37,24 +37,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ConfirmPasswordValidator.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/org/softuni/timeTracker/areas/user/entities/customValidator/ConfirmPasswordValidator.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ConfirmPassword.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/org/softuni/timeTracker/areas/user/entities/customValidator/ConfirmPassword.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="12" column="18" selection-start-line="12" selection-start-column="18" selection-end-line="12" selection-end-column="18" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="RegisterTimeUnitBindingModel.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/org/softuni/timeTracker/areas/time/models/timeUnit/RegisterTimeUnitBindingModel.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -77,7 +59,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TimeUnitSimpleTransferModel.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="TimeUnitSimpleTransferModel.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/org/softuni/timeTracker/areas/time/models/timeUnit/TimeUnitSimpleTransferModel.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="283">
@@ -91,6 +73,39 @@
                 <element signature="e#1346#1347#0" expanded="true" />
                 <element signature="e#1391#1392#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TimeUnitRepository.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/org/softuni/timeTracker/areas/time/repository/TimeUnitRepository.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="170">
+              <caret line="10" column="17" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TimeUnitServiceImpl.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/org/softuni/timeTracker/areas/time/service/TimeUnitServiceImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="366">
+              <caret line="43" column="24" selection-start-line="43" selection-start-column="24" selection-end-line="43" selection-end-column="24" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TimeUnitController.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/org/softuni/timeTracker/areas/time/controller/TimeUnitController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="181">
+              <caret line="40" column="76" selection-start-line="40" selection-start-column="76" selection-end-line="40" selection-end-column="76" />
             </state>
           </provider>
         </entry>
@@ -162,18 +177,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ConfirmTimeUnitTimeValidatorValidator.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/org/softuni/timeTracker/areas/time/entities/customValidator/ConfirmTimeUnitTimeValidatorValidator.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" column="77" selection-start-line="14" selection-start-column="77" selection-end-line="14" selection-end-column="77" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
@@ -232,17 +235,17 @@
         <option value="$PROJECT_DIR$/src/main/org/softuni/timeTracker/areas/time/service/ActivityServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/org/softuni/timeTracker/areas/time/service/TimeUnit.java" />
         <option value="$PROJECT_DIR$/src/main/org/softuni/timeTracker/areas/time/service/TimeUnitService.java" />
-        <option value="$PROJECT_DIR$/src/main/org/softuni/timeTracker/areas/time/controller/TimeUnitController.java" />
         <option value="$PROJECT_DIR$/src/main/org/softuni/timeTracker/areas/time/entities/customValidator/ConfirmDateValidator.java" />
         <option value="$PROJECT_DIR$/src/main/org/softuni/timeTracker/config/CustomErrorController.java" />
         <option value="$PROJECT_DIR$/src/main/org/softuni/timeTracker/areas/time/service/ProjectServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/org/softuni/timeTracker/areas/user/service/UserServiceImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/org/softuni/timeTracker/areas/time/service/TimeUnitServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/org/softuni/timeTracker/areas/time/entities/customValidator/ConfirmTimeUnitTimeValidatorValidator.java" />
         <option value="$PROJECT_DIR$/src/main/org/softuni/timeTracker/areas/time/entities/customValidator/ConfirmTImeUnitTime.java" />
         <option value="$PROJECT_DIR$/src/main/org/softuni/timeTracker/areas/time/models/timeUnit/RegisterTimeUnitBindingModel.java" />
         <option value="$PROJECT_DIR$/src/main/org/softuni/timeTracker/areas/time/entities/TimeUnit.java" />
         <option value="$PROJECT_DIR$/src/main/org/softuni/timeTracker/areas/time/models/timeUnit/TimeUnitSimpleTransferModel.java" />
+        <option value="$PROJECT_DIR$/src/main/org/softuni/timeTracker/areas/time/service/TimeUnitServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/org/softuni/timeTracker/areas/time/controller/TimeUnitController.java" />
       </list>
     </option>
   </component>
@@ -1157,12 +1160,12 @@
       <workItem from="1524405735905" duration="3614000" />
       <workItem from="1524409449161" duration="734000" />
       <workItem from="1524410192584" duration="35822000" />
-      <workItem from="1524826427945" duration="36802000" />
+      <workItem from="1524826427945" duration="37851000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="101713000" />
+    <option name="totallyTimeSpent" value="102762000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="886" extended-state="6" />
@@ -1414,16 +1417,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/org/softuni/timeTracker/areas/time/repository/TimeUnitRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" selection-start-line="2" selection-end-line="2" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/org/softuni/timeTracker/areas/time/service/ProjectService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="179">
@@ -1547,23 +1540,6 @@
             <element signature="e#2683#2684#0" expanded="true" />
             <element signature="e#2758#2759#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/org/softuni/timeTracker/areas/time/service/TimeUnitServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="52" selection-start-line="52" selection-end-line="52" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/org/softuni/timeTracker/areas/time/controller/TimeUnitController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="249">
-          <caret line="35" column="20" selection-start-line="35" selection-start-column="20" selection-end-line="35" selection-end-column="20" />
         </state>
       </provider>
     </entry>
@@ -1721,6 +1697,33 @@
             <element signature="e#1346#1347#0" expanded="true" />
             <element signature="e#1391#1392#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/org/softuni/timeTracker/areas/time/repository/TimeUnitRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="17" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/org/softuni/timeTracker/areas/time/service/TimeUnitServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="366">
+          <caret line="43" column="24" selection-start-line="43" selection-start-column="24" selection-end-line="43" selection-end-column="24" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/org/softuni/timeTracker/areas/time/controller/TimeUnitController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="181">
+          <caret line="40" column="76" selection-start-line="40" selection-start-column="76" selection-end-line="40" selection-end-column="76" />
         </state>
       </provider>
     </entry>
