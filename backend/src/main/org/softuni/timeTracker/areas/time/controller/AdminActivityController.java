@@ -1,8 +1,8 @@
 package org.softuni.timeTracker.areas.time.controller;
 
 import com.google.gson.Gson;
-import org.softuni.timeTracker.areas.time.models.ActivityViewModel;
-import org.softuni.timeTracker.areas.time.models.RegisterActivityBindingModel;
+import org.softuni.timeTracker.areas.time.models.activity.ActivityTransferModel;
+import org.softuni.timeTracker.areas.time.models.activity.RegisterActivityBindingModel;
 import org.softuni.timeTracker.areas.time.service.ActivityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,13 +20,13 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/admin")
-public class AdminTimeController {
+public class AdminActivityController {
 
     private final ActivityService activityService;
     private final Gson gson;
 
     @Autowired
-    public AdminTimeController(ActivityService activityService, Gson gson) {
+    public AdminActivityController(ActivityService activityService, Gson gson) {
         this.activityService = activityService;
         this.gson = gson;
     }
@@ -35,15 +35,15 @@ public class AdminTimeController {
     @GetMapping(value = "/activities", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity getUsers() {
 
-        List<ActivityViewModel> allActivities = this.activityService.getAllActivities();
+        List<ActivityTransferModel> allActivities = this.activityService.getAllActivities();
 
         return ResponseEntity.ok(gson.toJson(allActivities));
     }
 
-    @PostMapping(value = "/activities/create", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/activity/create", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity createActivity(@RequestBody @Valid RegisterActivityBindingModel activity, BindingResult bindingResult) {
         if (!bindingResult.hasErrors()) {
-            ActivityViewModel registerActivityBindingModel = this.activityService.saveActivity(activity);
+            ActivityTransferModel registerActivityBindingModel = this.activityService.saveActivity(activity);
             return ResponseEntity.ok(gson.toJson(registerActivityBindingModel));
         } else {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
@@ -51,13 +51,13 @@ public class AdminTimeController {
         }
     }
 
-    @GetMapping(value = "/activities/activate/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/activity/activate/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity activate(@PathVariable String id) {
 
         return ResponseEntity.ok(gson.toJson(this.activityService.enable(id, Boolean.TRUE)));
     }
 
-    @GetMapping(value = "/activities/deactivate/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/activity/deactivate/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity deactivate(@PathVariable String id) {
         return ResponseEntity.ok(gson.toJson(this.activityService.enable(id, Boolean.FALSE)));
     }

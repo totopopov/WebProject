@@ -12,9 +12,9 @@ import java.lang.annotation.Target;
 @Constraint(validatedBy = ConfirmDateValidator.class)
 public @interface ConfirmDate {
 
-    String PASSWORD_MISSMATCHING = "Future Date given.";
+    String FUTURE_DATE_GIVEN = "Future Date given.";
 
-    String message() default PASSWORD_MISSMATCHING;
+    String message() default FUTURE_DATE_GIVEN;
 
     Class<?>[] groups() default {};
 

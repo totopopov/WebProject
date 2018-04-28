@@ -167,7 +167,7 @@ function renderRowForAdminUserTable(entry) {
         (userEnabled ? 'Deactivate' : 'Activate')
         + '</a>');
 
-    let rowActions = $('<td class="d-flex justify-content-between"></td>');
+    let rowActions = $('<td class="d-flex justify-content-around"></td>');
     rowActions.append(buttonPromote);
     rowActions.append(buttonActivate);
     row.append(rowName);
@@ -200,10 +200,132 @@ function renderRowForAdminActivityTable(entry) {
         + '</a>');
 
 
-    let rowActions = $('<td></td>');
+    let rowActions = $('<td class="d-flex justify-content-around"></td>');
     rowActions.append(button);
     row.append(rowActivity);
     row.append(rowActivityKPI);
+    row.append(rowDescription);
+    row.append(rowActions);
+    return row;
+}
+
+function renderRowForAdminProjectActivityTable(entry, idProject, activities) {
+
+    let enabled = entry['enabled'];
+
+    let activity = entry['activity'];
+    if (!enabled) {
+        return;
+    }
+
+    let isPart = false;
+
+    for (let projectActivity of activities) {
+        if (projectActivity === activity) {
+            isPart = true;
+            break;
+        }
+    }
+
+    let activityKPI = entry['activityKPI'];
+    let description = entry['description'];
+    let id = entry['id'];
+
+
+    let row = $('#' + id);
+    row = (row.length === 0 ? $('<tr id="' + id + '"></tr>') : row);
+    row.empty();
+    let rowActivity = $('<td>' + activity + '</td>');
+    let rowActivityKPI = $('<td>' + activityKPI + '</td>');
+    let rowDescription = $('<td>' + description + '</td>');
+
+    let button = $('<a href="#/admin/project?action=' +
+        (isPart ? 'remove' : 'add') + '&idProject=' + idProject
+        + '&id=' + id + '" class="btn btn-' + (isPart ? 'danger' : 'warning') + ' " role="button">' +
+        (isPart ? 'REMOVE' : 'ADD')
+        + '</a>');
+
+
+    let rowActions = $('<td class="d-flex justify-content-around"></td>');
+    rowActions.append(button);
+    row.append(rowActivity);
+    row.append(rowActivityKPI);
+    row.append(rowDescription);
+    row.append(rowActions);
+    return row;
+}
+
+// function renderRowForAdminProjectActivityTable(entry, idProject, activities) {
+//
+//     let enabled = entry['enabled'];
+//     let activity = entry['activity'];
+//     if (!enabled) {
+//         return;
+//     }
+//
+//     let isPart = false;
+//
+//     for (let projectActivity of activities) {
+//         if (projectActivity === activity) {
+//             isPart = true;
+//             break;
+//         }
+//     }
+//
+//     let activityKPI = entry['activityKPI'];
+//     let description = entry['description'];
+//     let id = entry['id'];
+//
+//
+//     let row = $('#' + id);
+//     row = (row.length === 0 ? $('<tr id="' + id + '"></tr>') : row);
+//     row.empty();
+//     let rowActivity = $('<td>' + activity + '</td>');
+//     let rowActivityKPI = $('<td>' + activityKPI + '</td>');
+//     let rowDescription = $('<td>' + description + '</td>');
+//
+//     let button = $('<a href="#/admin/project?action=' +
+//         (isPart ? 'add' : 'remove') + '&idProject=' + idProject
+//         + '&id=' + id + '" class="btn btn-' + (isPart ? 'danger' : 'warning') + ' " role="button">' +
+//         (isPart ? 'ADD' : 'REMOVE')
+//         + '</a>');
+//
+//
+//     let rowActions = $('<td class="d-flex justify-content-around"></td>');
+//     rowActions.append(button);
+//     row.append(rowActivity);
+//     row.append(rowActivityKPI);
+//     row.append(rowDescription);
+//     row.append(rowActions);
+//     return row;
+// }
+
+function renderRowForAdminProjectTable(entry) {
+    let project = entry['project'];
+    let description = entry['description'];
+    let enabled = entry['enabled'];
+    let id = entry['id'];
+
+
+    let row = $('#' + id);
+    row = (row.length === 0 ? $('<tr id="' + id + '"></tr>') : row);
+    row.empty();
+    let rowProject = $('<td>' + project + '</td>');
+    let rowDescription = $('<td>' + description + '</td>');
+
+    let buttonEnable = $('<a href="#/admin/project?action=' +
+        (enabled ? 'deactivate' : 'activate')
+        + '&id=' + id + '" class="btn btn-' + (enabled ? 'danger' : 'warning') + ' " role="button">' +
+        (enabled ? 'Deactivate' : 'Activate')
+        + '</a>');
+    let buttonEdit = $('<a href="#/admin/project/edit?id='
+        + id + '"class="btn btn-info" role="button">Edit Project</a>');
+
+
+    let rowActions = $('<td class="d-flex justify-content-around"></td>');
+    rowActions.append(buttonEnable);
+    rowActions.append(buttonEdit);
+    row.append(rowProject);
     row.append(rowDescription);
     row.append(rowActions);
     return row;
@@ -231,6 +353,25 @@ app.router.on("#/home", null, function () {
 
     }
     app.templateLoader.loadTemplate('.app', 'home', function () {
+
+        app.callServize.sendGET('/admin/projects', function (data) {
+
+
+
+            let tableBody = $('#table-projects-admin');
+
+            for (let entry of data) {
+
+                let row = renderRowForAdminProjectTable(entry);
+                tableBody.append(row);
+            }
+
+        }, function (xhr, status, error) {
+
+            showEror(xhr);
+
+        });
+
     });
 });
 
@@ -305,6 +446,173 @@ app.router.on("#/admin/activities", null, function () {
 
 });
 
+app.router.on("#/admin/projects", null, function () {
+
+    if (!app.authorizationService.isAdmin()) {
+        app.router.redirect('#/');
+        return;
+
+    }
+    app.templateLoader.loadTemplate('.app', 'projects', function () {
+
+            app.callServize.sendGET('/admin/projects', function (data) {
+
+
+                let tableBody = $('#table-projects-admin');
+
+                for (let entry of data) {
+
+                    let row = renderRowForAdminProjectTable(entry);
+                    tableBody.append(row);
+                }
+
+            }, function (xhr, status, error) {
+
+                showEror(xhr);
+
+            });
+        }
+    );
+
+});
+
+
+app.router.on("#/admin/project/create", null, function () {
+
+    if (!app.authorizationService.isAdmin()) {
+        app.router.redirect('#/');
+        return;
+
+    }
+
+
+    window.location.href = '#/admin/project/created';
+
+    let projectName = $('#project-name');
+    let projectDescription = $('#project-description');
+
+    let sendData = JSON.stringify({
+        "project": projectName.val(),
+        "description": projectDescription.val(),
+    });
+
+
+    app.callServize.sendPOST('/admin/project/create', sendData, (data) => {
+
+
+        let tableBody = $('#table-projects-admin');
+        let row = renderRowForAdminProjectTable(data);
+        tableBody.prepend(row);
+
+        projectName.val('');
+        projectDescription.val('');
+
+    }, (xhr, status, error) => {
+
+        showEror(xhr);
+
+    });
+
+
+});
+
+app.router.on("#/admin/project", ['id', 'action'], function (id, action) {
+
+    if (!app.authorizationService.isAdmin()) {
+        app.router.redirect('#/');
+        return;
+    }
+
+    app.callServize.sendGET('/admin/project/' + action + '/' + id, (data) => {
+
+        renderRowForAdminProjectTable(data);
+
+    }, (xhr, status, error) => {
+
+        showEror(xhr);
+
+    });
+
+
+});
+
+app.router.on("#/admin/project/edit", ['id'], function (id) {
+
+    if (!app.authorizationService.isAdmin()) {
+        app.router.redirect('#/');
+        return;
+    }
+
+
+    app.templateLoader.loadTemplate('.app', 'project-activities', function () {
+
+            app.callServize.sendGET('/admin/project/' + id, function (project) {
+
+                console.log('show activities');
+                console.log(project);
+
+                let activities = project['simpleActivities'];
+
+                let tableBody = $('#table-project-activities-admin');
+
+                app.callServize.sendGET('/admin/activities', function (data) {
+
+                    console.log('Incoming from on activities');
+                    console.log(data);
+
+                    let tableBody = $('#table-project-activities-admin');
+
+                    for (let entry of data) {
+
+                        let row = renderRowForAdminProjectActivityTable(entry, id, activities);
+                        tableBody.append(row);
+                    }
+
+                }, function (xhr, status, error) {
+
+                    showEror(xhr);
+
+                });
+
+            }, function (xhr, status, error) {
+
+                showEror(xhr);
+
+            });
+
+
+        }
+    );
+
+
+});
+
+
+app.router.on("#/admin/project", ['action', 'idProject', 'id'], function (action, idProject, id) {
+
+    if (!app.authorizationService.isAdmin()) {
+        app.router.redirect('#/');
+        return;
+
+    }
+
+    app.callServize.sendGET('/admin/project/' + action + '/' +
+        idProject + '/' + id, (data) => {
+
+        let entry=data['activityTransferModel'];
+        let activities= data['projectTransferModel']['simpleActivities'];
+
+        renderRowForAdminProjectActivityTable(entry, idProject, activities);
+
+    }, (xhr, status, error) => {
+
+        showEror(xhr);
+
+    });
+
+
+});
+
 
 app.router.on("#/admin/activities/create", null, function () {
 
@@ -328,7 +636,7 @@ app.router.on("#/admin/activities/create", null, function () {
     });
 
 
-    app.callServize.sendPOST('/admin/activities/create', sendData, (data) => {
+    app.callServize.sendPOST('/admin/activity/create', sendData, (data) => {
 
         console.log('Incoming from server');
         console.log(data);
@@ -358,8 +666,7 @@ app.router.on("#/admin/activity", ['id', 'action'], function (id, action) {
 
     }
 
-
-    app.callServize.sendGET('/admin/activities/' + action + '/' + id, (data) => {
+    app.callServize.sendGET('/admin/activity/' + action + '/' + id, (data) => {
 
         renderRowForAdminActivityTable(data);
 

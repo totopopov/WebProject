@@ -3,7 +3,10 @@ package org.softuni.timeTracker.areas.time.entities;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "project")
@@ -20,19 +23,23 @@ public class Project {
 
     private String project;
 
-    private String descrioptio;
+    private String description;
 
     private Boolean enabled;
 
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "project_activities", joinColumns = @JoinColumn(name = "project_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "activty_id", referencedColumnName = "id"))
-    private List<Activity> activities;
+    private Set<Activity> activities;
 
 
     public Project() {
+        this.activities = new HashSet<>();
+    }
 
+    public String getId() {
+        return id;
     }
 
     public String getProject() {
@@ -43,20 +50,20 @@ public class Project {
         this.project = project;
     }
 
-    public List<Activity> getActivities() {
+    public Set<Activity> getActivities() {
         return activities;
     }
 
-    public void setActivities(List<Activity> activities) {
+    public void setActivities(Set<Activity> activities) {
         this.activities = activities;
     }
 
-    public String getDescrioptio() {
-        return descrioptio;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDescrioptio(String descrioptio) {
-        this.descrioptio = descrioptio;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Boolean getEnabled() {
@@ -65,5 +72,26 @@ public class Project {
 
     public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
+    }
+
+
+    @Transient
+    public List<String> getSimpleActivities() {
+        return activities.stream().map(Activity::getActivity).collect(Collectors.toList());
+    }
+
+    @Transient
+    public void setActivities() {
+
+    }
+
+    @Transient
+    public Boolean addActivity(Activity activity) {
+        return this.activities.add(activity);
+    }
+
+    @Transient
+    public Boolean removeActivity(Activity activity) {
+        return this.activities.remove(activity);
     }
 }

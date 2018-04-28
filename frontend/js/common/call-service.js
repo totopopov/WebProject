@@ -3,6 +3,7 @@ var app = app || {};
 function logOutUser(data) {
     if (data['status'] === 403) {
         app.authorizationService.clearAuth();
+        showEror(data);
     }
 }
 

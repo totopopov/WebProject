@@ -12,10 +12,10 @@ import java.lang.annotation.Target;
 @Component
 @Target({ElementType.FIELD, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = ConfirmActivityNameValidator.class)
-public @interface ConfirmActivityName {
+@Constraint(validatedBy = ConfirmProjectNameValidator.class)
+public @interface ConfirmProjectName {
 
-    String TRY_ANOTHER = "Activity name exits. Try another !";
+    String TRY_ANOTHER = "Project name exits. Try another !";
 
     String message() default TRY_ANOTHER;
 

@@ -23,6 +23,6 @@ public class ConfirmActivityNameValidator implements ConstraintValidator<Confirm
 
     @Override
     public boolean isValid(String activity, ConstraintValidatorContext context) {
-        return this.activityService.CheckDoesNotExist(activity);
+        return this.activityService.checkDoesNotExist(activity);
     }
 }

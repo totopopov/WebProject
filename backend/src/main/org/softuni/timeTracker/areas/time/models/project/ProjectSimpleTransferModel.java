@@ -1,19 +1,17 @@
-package org.softuni.timeTracker.areas.time.models;
+package org.softuni.timeTracker.areas.time.models.project;
 
-
-public class ActivityViewModel {
+public class ProjectSimpleTransferModel {
 
     private String id;
 
-    private String activity;
-
-    private String activityKPI;
+    private String project;
 
     private String description;
 
     private Boolean enabled;
 
-    public ActivityViewModel() {
+    public ProjectSimpleTransferModel() {
+
     }
 
     public String getId() {
@@ -24,20 +22,12 @@ public class ActivityViewModel {
         this.id = id;
     }
 
-    public String getActivity() {
-        return activity;
+    public String getProject() {
+        return project;
     }
 
-    public void setActivity(String activity) {
-        this.activity = activity;
-    }
-
-    public String getActivityKPI() {
-        return activityKPI;
-    }
-
-    public void setActivityKPI(String activityKPI) {
-        this.activityKPI = activityKPI;
+    public void setProject(String project) {
+        this.project = project;
     }
 
     public String getDescription() {

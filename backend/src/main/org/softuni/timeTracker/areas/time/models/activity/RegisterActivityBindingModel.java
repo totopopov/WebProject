@@ -1,4 +1,4 @@
-package org.softuni.timeTracker.areas.time.models;
+package org.softuni.timeTracker.areas.time.models.activity;
 
 
 import org.softuni.timeTracker.areas.time.entities.customValidator.ConfirmActivityName;
