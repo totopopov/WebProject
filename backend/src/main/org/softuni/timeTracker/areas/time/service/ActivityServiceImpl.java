@@ -47,6 +47,12 @@ public class ActivityServiceImpl implements ActivityService {
     }
 
     @Override
+    public Activity findActivity(String name) {
+
+        return this.activityRepository.findByActivity(name);
+    }
+
+    @Override
     public Boolean checkDoesNotExist(String activity) {
         if (activity == null) {
             return false;

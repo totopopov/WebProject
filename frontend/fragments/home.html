@@ -1,3 +1,45 @@
 <div class="mt-5">
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>Date</th>
+            <th>Project</th>
+            <th>Activity</th>
+            <th class="very-fit">Time</th>
+            <th class="very-fit">Completed task</th>
+            <th>Coments</th>
+            <th class="text-center">Actions</th>
+        </tr>
+        <tr id="activity-form">
+            <td>
+                <input id="daily-date" type="date" name="date" class="form-control">
+            </td>
 
+            <td>
+                <select id="selectProject" class="form-control" name="project">
+                    <option selected disabled>Select Project</option>
+                </select>
+
+            </td>
+            <td>
+                <select id="selectActivity" class="form-control" name="activity">
+                    <option selected disabled>Select Activity</option>
+                </select>
+            </td>
+            <td>
+                <input id="time" type="number" step="0.5" name="time" min="0" max="8" class="form-control">
+            </td>
+            <td>
+                <input id="task" type="number" step="1" min="0" name="task" class="form-control">
+            </td>
+            <td>
+                <input id="comment" type="text" step="1" min="0" name="comment" class="form-control">
+            </td>
+            <td><a id="entry-button" href="#/entry/create" class="btn btn-success"
+                   role="button">Create</a></td>
+        </tr>
+        </thead>
+        <tbody id="table-daily">
+        </tbody>
+    </table>
 </div>

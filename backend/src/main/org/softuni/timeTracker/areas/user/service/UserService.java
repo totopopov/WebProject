@@ -1,5 +1,6 @@
 package org.softuni.timeTracker.areas.user.service;
 
+import org.softuni.timeTracker.areas.user.entities.User;
 import org.softuni.timeTracker.areas.user.models.EditUserBindingModel;
 import org.softuni.timeTracker.areas.user.models.RegisterUserBindingModel;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -10,6 +11,8 @@ public interface UserService extends UserDetailsService {
     boolean save(RegisterUserBindingModel user);
 
     boolean userExists(String username);
+
+    User userByName(String username);
 
     List<EditUserBindingModel> getAllUsers();
 

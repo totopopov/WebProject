@@ -7,6 +7,10 @@ body {
 
 }
 
+.very-fit{
+    width: 100px;
+}
+
 a.link-home:link, a.link-home:visited {
     color: black;
     z-index: 201;

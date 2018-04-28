@@ -14,7 +14,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -46,6 +48,15 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
+    public Project findProject(String id) {
+        Optional<Project> projectOptional = this.projectRepository.findById(id);
+        if (projectOptional.isPresent()) {
+            return projectOptional.get();
+        }
+        throw new IllegalArgumentException(String.format("%s : %s", PROJECT_WITH_FOLLOWING_ID_NOT_FOUND, id));
+    }
+
+    @Override
     public ProjectSimpleTransferModel saveProject(RegisterProjectBindingModel registerProjectBindingModel) {
         Project saved = this.projectRepository.save(this.modelParser.map(registerProjectBindingModel, Project.class));
         ProjectSimpleTransferModel mapedActivity = this.modelParser.map(saved, ProjectSimpleTransferModel.class);
@@ -57,6 +68,16 @@ public class ProjectServiceImpl implements ProjectService {
         List<ProjectSimpleTransferModel> projects = this.modelParser.map(this.projectRepository.findAll(), ProjectSimpleTransferModel.class);
 
         return projects;
+    }
+
+    @Override
+    public Map<String, ProjectTransferModel> getAllActiveProjects() {
+        List<ProjectTransferModel> projects = this.modelParser.map(this.projectRepository.findAllByEnabledTrue(), ProjectTransferModel.class);
+        HashMap<String, ProjectTransferModel> mapedProjects = new HashMap<>();
+        for (ProjectTransferModel project : projects) {
+            mapedProjects.putIfAbsent(project.getProject(), project);
+        }
+        return mapedProjects;
     }
 
     @Override

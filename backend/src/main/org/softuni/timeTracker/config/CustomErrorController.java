@@ -3,6 +3,7 @@ package org.softuni.timeTracker.config;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.error.ErrorController;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,7 +28,7 @@ public class CustomErrorController implements ErrorController {
     @RequestMapping("/error")
     public ResponseEntity handleError(HttpServletRequest request) {
         Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
-        return ResponseEntity.ok(gson.toJson(status));
+        return ResponseEntity.status(HttpStatus.I_AM_A_TEAPOT).body(gson.toJson(status));
 
     }
 

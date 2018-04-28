@@ -70,6 +70,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User userByName(String username) {
+        return this.userRepository.findByUsername(username);
+    }
+
+    @Override
     public List<EditUserBindingModel> getAllUsers() {
         List<User> users = this.userRepository.
                 findAllByUsernameIsNotAndUsernameIsNot(SecurityContextHolder.getContext().getAuthentication().

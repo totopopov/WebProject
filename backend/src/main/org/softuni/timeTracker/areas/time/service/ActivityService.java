@@ -14,6 +14,8 @@ public interface ActivityService {
 
     ActivityTransferModel saveActivity(RegisterActivityBindingModel activityBindingModel);
 
+    Activity findActivity(String name);
+
     Boolean checkDoesNotExist(String activity);
 
 
